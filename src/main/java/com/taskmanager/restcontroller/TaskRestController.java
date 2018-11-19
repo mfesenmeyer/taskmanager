@@ -1,15 +1,23 @@
 package com.taskmanager.restcontroller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.taskmanager.business.Ticket;
+import com.taskmanager.repository.TaskJdbcRepositoryDao;
 
 @RestController
 public class TaskRestController {
 
-    @RequestMapping("/greeting/")
-    public String greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return "Hello " + name;
+	@Autowired
+	TaskJdbcRepositoryDao dao;
+	
+    @RequestMapping("/getTasks/{ticketNumber}")
+    public String getTasks(@PathVariable("ticketNumber") int ticketNumber) {
+       Ticket test = dao.getTicketByNumber(ticketNumber);
+       return test.toString();
     }
 	
 	

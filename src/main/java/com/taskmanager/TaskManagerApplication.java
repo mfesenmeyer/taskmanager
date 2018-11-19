@@ -1,31 +1,32 @@
 package com.taskmanager;
 
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.taskmanager.business.Ticket;
+import com.taskmanager.repository.TaskJdbcRepositoryDao;
 
 @SpringBootApplication
-public class TaskManagerApplication {
+public class TaskManagerApplication implements CommandLineRunner  {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TaskManagerApplication.class, args);
 	}
 	
-	public void run(String... args) throws Exception {
-		final Logger logger = LogManager.getLogger(TaskManagerApplication.class);
+	@Autowired
+	TaskJdbcRepositoryDao dao;
+	// Override then there needs to be a method declaration somewhere in the int/parent class that you're implementing/inheriting 
+	@Override
+    public void run(String... args) throws Exception {
+		System.out.println("Test");
+		Ticket test = dao.getTicketByNumber(1);
 		
-       //implement your business logic here
-    	Ticket ticketTest = new Ticket();
-    	ticketTest.setTicketNumber(123);
-    	ticketTest.setTicketTitle("Test Ticket");
-    	
-    	System.out.println(ticketTest);
-    	logger.info(ticketTest);
-    	
+		System.out.println(test);
+
+    
     }
 	
 }

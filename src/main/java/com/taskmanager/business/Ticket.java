@@ -4,12 +4,13 @@ public class Ticket {
 
 	private int ticketNumber;
 	private String ticketTitle;
+	private String ticketNote;
 	
 	public int getTicketNumber() {
 		return ticketNumber;
 	}
-	public void setTicketNumber(int ticketNumber) {
-		this.ticketNumber = ticketNumber;
+	public void setTicketNumber(int l) {
+		this.ticketNumber = l;
 	}
 	public String getTicketTitle() {
 		return ticketTitle;
@@ -18,8 +19,16 @@ public class Ticket {
 		this.ticketTitle = ticketTitle;
 	}
 	
+	public String getTicketNote() {
+		return ticketNote;
+	}
+	public void setTicketNote(String ticketNote) {
+		this.ticketNote = ticketNote;
+	}
+	
 	@Override
 	public String toString() {
-		return "Ticket [ticketNumber=" + ticketNumber + ", ticketTitle=" + ticketTitle + "]";
+		return "Ticket [ticketNumber=" + ticketNumber + ", ticketTitle=" + ticketTitle + ", ticketNote=" + ticketNote
+				+ "]";
 	}
 }

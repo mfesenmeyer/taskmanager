@@ -2,11 +2,30 @@
 <html>
 <head>
 <title>Task Manager</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 </head>
 <body>
 
 <h1>Task Manager Web Application</h1>
 <p>By: Gabe Nardi-Huffman & Mark Fesenmeyer</p>
 
+<p class="ticket-info"></p>
+
+
 </body>
+
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "http://localhost:8080/getTasks/1"
+    }).then(function(data) {
+    	$('.ticket-info').append(data);
+    	
+/*        $('.greeting-id').append(data.id);
+       $('.greeting-content').append(data.content); */
+    });
+});
+
+</script>
 </html>
