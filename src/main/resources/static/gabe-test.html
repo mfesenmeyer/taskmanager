@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Task Manager</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+</head>
+<body>
+
+<h1 style="text-align:center; font-style: italic;">Ticket Tag</h1>
+
+<!-- Dropdown currently hardcoded but I'll change that -->
+<select id="ticketNumberOptions">
+  <option value="1">1</option>
+  <option value="2">2</option>
+</select>
+
+<input type="submit" value="Submit" class="ticketNumberOptionsSubmit">
+
+
+<!-- Populate these fields for the ticket selected-->
+<p class="ticket-number">ticket number: </p>
+<p class="ticket-title">ticket title: </p>
+<p class="ticket-note"><ticket note: </p>
+
+</body>
+
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "http://localhost:8080/getTasks/1"
+    }).then(function(data) {
+        $('.ticket-info').append(data.ticketNumber);
+        $('.ticket-number').append(data.ticketNumber);
+    	$('.ticket-title').append(data.ticketTitle);
+        $('.ticket-note').append(data.ticketNote);
+
+    });
+});
+
+
+// Wait for onclick event to trigger ajax call - Submit button
+$('.ticketNumberOptionsSubmit').click(function(){
+
+// Select the value from the HTML
+var ticketNum = document.getElementById("ticketNumberOptions");
+
+//Clear all of the old values
+        $('.ticket-number').data("");
+    	$('.ticket-title').data("");
+        $('.ticket-note').data("");
+
+$.ajax({
+        url: "http://localhost:8080/getTasks/" + ticketNum
+    }).then(function(data) {
+        $('.ticket-number').append(data.ticketNumber);
+    	$('.ticket-title').append(data.ticketTitle);
+        $('.ticket-note').append(data.ticketNote);
+
+    });
+});
+
+
+</script>
+</html>
