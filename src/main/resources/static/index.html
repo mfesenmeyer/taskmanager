@@ -57,24 +57,24 @@ body {
 
 
 <!-- Populate these fields for the ticket selected-->
-<p class="ticket-number">ticket number: </p>
-<p class="ticket-title">ticket title: </p>
-<p class="ticket-note"><ticket note: </p>
+<p>ticket number:</p><p class="ticket-number"></p>
+<p>ticket title:</p><p class="ticket-title"></p>
+<p>ticket note:</p><p class="ticket-note"></p>
 </div>
 </body>
 
 <script>
-$(document).ready(function() {
-    $.ajax({
-        url: "http://localhost:8080/getTasks/1"
-    }).then(function(data) {
-        $('.ticket-info').append(data.ticketNumber);
-        $('.ticket-number').append(data.ticketNumber);
-    	$('.ticket-title').append(data.ticketTitle);
-        $('.ticket-note').append(data.ticketNote);
+// $(document).ready(function() {
+//     $.ajax({
+//         url: "http://localhost:8080/getTasks/1"
+//     }).then(function(data) {
+//         $('.ticket-info').append(data.ticketNumber);
+//         $('.ticket-number').append(data.ticketNumber);
+//     	$('.ticket-title').append(data.ticketTitle);
+//         $('.ticket-note').append(data.ticketNote);
 
-    });
-});
+//     });
+// });
 
 
 // Wait for onclick event to trigger ajax call - Submit button
@@ -82,14 +82,18 @@ $('.ticketNumberOptionsSubmit').click(function(){
 
 // Select the value from the HTML
 var ticketNum = document.getElementById("ticketNumberOptions");
+var ticketNumValue = ticketNum.options[ticketNum.selectedIndex].text;
+
+
+console.log(ticketNumValue);
 
 //Clear all of the old values
-        $('.ticket-number').data("");
-    	$('.ticket-title').data("");
-        $('.ticket-note').data("");
+        $('.ticket-number').text("");
+    	$('.ticket-title').text("");
+        $('.ticket-note').text("");
 
 $.ajax({
-        url: "http://localhost:8080/getTasks/" + ticketNum
+        url: "http://localhost:8080/getTasks/" + ticketNumValue
     }).then(function(data) {
         $('.ticket-number').append(data.ticketNumber);
     	$('.ticket-title').append(data.ticketTitle);
