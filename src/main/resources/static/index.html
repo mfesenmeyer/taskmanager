@@ -3,16 +3,64 @@
 <head>
 <title>Task Manager</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
 </head>
+
 <body>
 
-<h1>Task Manager Web Application</h1>
-<p>By: Gabe Nardi-Huffman & Mark Fesenmeyer</p>
+<!-- Top Navigation -->
+<div class="topnav">
+  <a class="active" href="/index.html">Home</a>
+  <a href="/createticket/ticket.html">Ticket</a>
+</div>
 
-<p class="ticket-info"></p>
+<h1 style="text-align:center; font-style: italic;">Ticket Tag</h1>
+
+<!-- Dropdown currently hardcoded but I'll change that -->
+
+<div style="margin-left:15px;">
+<select id="ticketNumberOptions">
+  <option value="1">1</option>
+  <option value="2">2</option>
+</select>
+
+<input type="submit" value="Submit" class="ticketNumberOptionsSubmit">
 
 
+<!-- Populate these fields for the ticket selected-->
+<p class="ticket-number">ticket number: </p>
+<p class="ticket-title">ticket title: </p>
+<p class="ticket-note"><ticket note: </p>
+</div>
 </body>
 
 <script>
@@ -20,12 +68,36 @@ $(document).ready(function() {
     $.ajax({
         url: "http://localhost:8080/getTasks/1"
     }).then(function(data) {
-    	$('.ticket-info').append(data);
-    	
-/*        $('.greeting-id').append(data.id);
-       $('.greeting-content').append(data.content); */
+        $('.ticket-info').append(data.ticketNumber);
+        $('.ticket-number').append(data.ticketNumber);
+    	$('.ticket-title').append(data.ticketTitle);
+        $('.ticket-note').append(data.ticketNote);
+
     });
 });
+
+
+// Wait for onclick event to trigger ajax call - Submit button
+$('.ticketNumberOptionsSubmit').click(function(){
+
+// Select the value from the HTML
+var ticketNum = document.getElementById("ticketNumberOptions");
+
+//Clear all of the old values
+        $('.ticket-number').data("");
+    	$('.ticket-title').data("");
+        $('.ticket-note').data("");
+
+$.ajax({
+        url: "http://localhost:8080/getTasks/" + ticketNum
+    }).then(function(data) {
+        $('.ticket-number').append(data.ticketNumber);
+    	$('.ticket-title').append(data.ticketTitle);
+        $('.ticket-note').append(data.ticketNote);
+
+    });
+});
+
 
 </script>
 </html>

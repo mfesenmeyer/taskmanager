@@ -21,12 +21,26 @@ public class TaskManagerApplication implements CommandLineRunner  {
 	// Override then there needs to be a method declaration somewhere in the int/parent class that you're implementing/inheriting 
 	@Override
     public void run(String... args) throws Exception {
-		System.out.println("Test");
-		Ticket test = dao.getTicketByNumber(1);
+		Ticket test = dao.getTicketByNumber(1);	
+		
+//		Ticket testTicket = new Ticket();
+//		testTicket.setTicketNumber(2);
+//		testTicket.setTicketTitle("Pick up groceries");
+//		testTicket.setTicketNote("This is a test for adding a row");
+//		
+//		dao.addTicket(testTicket);
+		
+//		Ticket ticketCompl = new Ticket();
+//		ticketCompl.setTicketTitle("Comp Ticket Title");
+//		ticketCompl.setTicketNote("Notes");
+//		ticketCompl.setTicketTag("#tag");
+//		ticketCompl.setTicketAlert(true);
+//		ticketCompl.setTicketStatus("Status");
+//		
+//		dao.addComplTicket(ticketCompl);
 		
 		System.out.println(test);
-
-    
+  
     }
 	
 }
